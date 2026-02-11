@@ -10,7 +10,7 @@ for file_name in os.listdir(PATH_TO_CDOP_INSTANCES):
     instance_id = ".".join(file_name.split(".")[:-1])
     N = int(instance_id.split(".")[1])
     t_max, clusters, scores_within_clusters = load_CDOP_instance(instance_id)
-    sources, sinks = find_sources_and_sinks(clusters, l_max = int(np.round(np.log2(N))))
+    sources, sinks = find_sources_and_sinks(clusters, l_max = int(np.floor(np.sqrt(2 * N))))
     for m in range(1, len(clusters) - 1):
         t_max_within_m = compute_upper_bound_for_maximal_t_max_within_cluster(t_max, m, clusters, sources, sinks)
         sources_within_cluster_m = [clusters[m][i] for i in sources[m]]
